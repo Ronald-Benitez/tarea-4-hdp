@@ -11,7 +11,7 @@ if (isset($_GET["id"])){
 
     $comentarios = buscarComentarios($id,"idPost","aprobado","estadoC");
 
-    if (isset($_POST['comentario'])){
+    if (isset($_POST['comentario']) && $_POST['comentario'] != ""){
         echo (date("Y-m-d H:i:s"));
         echo ("si");
         insertarComentario(date("Y-m-d H:i:s"),$id,$_SESSION['id'],$_POST['comentario'],"esperando");
