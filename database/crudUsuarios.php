@@ -20,7 +20,7 @@ function mostrarUsuarios(){
 function ingresarUsuarios($usuario,$correo,$contrasena,$tipo){
     try {
         $con=connect();
-        $sql = "INSERT INTO usuarios(usuario,correo,contrasena,tipo) VALUES('$usuario','$correo','$contrasena','$tipo')";
+        $sql = "INSERT INTO usuarios(usuario,correo,contrasena,tipo,estado) VALUES('$usuario','$correo','$contrasena','$tipo','habilitado')";
         $resultado=mysqli_query($con,$sql);
         $con=null;
     } catch (Exception $e) {
