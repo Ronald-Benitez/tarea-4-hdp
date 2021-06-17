@@ -71,6 +71,7 @@ if(isset($_POST["titulo"])){
                                     <h5 class="card-title bg-transparent"><?=$row['titulo']?></h5>
                                     <p class="card-text bg-transparent"><small class="text-muted">Autor: <?=$row['usuario']?></small></p>
                                     <p class="card-text bg-transparent"><small class="text-muted">Creado: <?=$row['fecha']?></small></p>
+                                    <p class="card-text bg-transparent"><small class="text-muted">Número: <?=$row['idPost']?></small></p>
                                 </div>
                                 
                             </div>

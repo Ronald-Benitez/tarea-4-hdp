@@ -11,11 +11,12 @@ if (isset($_GET["id"])){
 
     $comentarios = buscarComentarios($id,"idPost","aprobado","estadoC");
 
-if (isset($_POST['comentario'])){
-    echo (date("Y-m-d H:i:s"));
-    insertarComentario(date("Y-m-d H:i:s"),$id,"1",$_POST['comentario'],"esperando");
-    header("Location:vistaPost.php?id=$id");
-}
+    if (isset($_POST['comentario'])){
+        echo (date("Y-m-d H:i:s"));
+        echo ("si");
+        insertarComentario(date("Y-m-d H:i:s"),$id,$_SESSION['id'],$_POST['comentario'],"esperando");
+        header("Location:vistaPost.php?id=$id");
+    }
 
 ?>
 
@@ -55,6 +56,7 @@ if (isset($_POST['comentario'])){
                             <p class="card-text p-4"><?=$row['texto']?></p>
                             <p class="card-text"><small class="text-muted">Autor: <?=$row['usuario']?></small></p>
                             <p class="card-text"><small class="text-muted">Creado: <?=$row['fecha']?></small></p>
+                            <p class="card-text"><small class="text-muted">Número: <?=$row['idPost']?></small></p>
                         </div>
                             
                     </div>
@@ -63,6 +65,7 @@ if (isset($_POST['comentario'])){
             
             </div>
 
+            <?php if($_SESSION['state']=="habilitado"){ ?>
             <div class="row justify-content-center mt-2">
             
                 <div class="col-6 align-self-center">
@@ -77,6 +80,7 @@ if (isset($_POST['comentario'])){
 
                 </div>
             </div>
+            <?php } ?>
             <div class="row justify-content-center my-4 ">
                 <div class="col-6 align-self-center">
                 

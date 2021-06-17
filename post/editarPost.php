@@ -22,12 +22,12 @@ if(isset($_POST['titulo'])){
                 $_SESSION['message'] = "La imagen debe ser jpg o png";
                 $_SESSION['message_type'] = "warning";
             }else{
-                editarPost($_POST['fecha'],1,$_POST['titulo'],$imagen,$_POST['texto'],$_GET['id']);
+                editarPost($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$imagen,$_POST['texto'],$_GET['id']);
                 move_uploaded_file($temp,'../img/'.$imagen);
                 header("Location:editarPost.php?id=$id");
             }
         }else{
-            editarPostSIMG($_POST['fecha'],1,$_POST['titulo'],$_POST['texto'],$_GET['id']);
+            editarPostSIMG($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$_POST['texto'],$_GET['id']);
             header("Location:editarPost.php?id=$id");
         }
     }

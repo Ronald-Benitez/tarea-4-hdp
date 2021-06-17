@@ -91,6 +91,7 @@ if(isset($_POST["titulo"])){
                             <div class="card-body">
                                 <h5 class="card-title"><?=$row['titulo']?></h5>
                                 <p class="card-text">Creado: <?=$row['fecha']?></p>
+                                <p class="card-text">Número: <?=$row['idPost']?></p>
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <a href="editarPost.php?id=<?=$row['idPost']?>" class="btn btn-outline-secondary">Editar</a>
                                     <a href="eliminarPost.php?id=<?=$row['idPost']?>" class="btn btn-outline-secondary">Eliminar</a>

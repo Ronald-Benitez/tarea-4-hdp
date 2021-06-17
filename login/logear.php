@@ -16,6 +16,7 @@
         $_SESSION['id'] = $datos_usu['idUsuario'];
         $_SESSION['user'] = $datos_usu['usuario'];
         $_SESSION['type'] = $datos_usu['tipo'];
+        $_SESSION['state'] = $datos_usu['estado'];
 
         // comparar tipos de usuarios
         if($_SESSION['type']=="viewer"){

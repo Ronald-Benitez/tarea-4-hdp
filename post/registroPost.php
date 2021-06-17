@@ -14,7 +14,7 @@ if(isset($_POST['titulo'])){
             $_SESSION['message'] = "La imagen debe ser jpg o png";
             $_SESSION['message_type'] = "warning";
         }else{
-            insertarPost($_POST['fecha'],1,$_POST['titulo'],$imagen,$_POST['texto']);
+            insertarPost($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$imagen,$_POST['texto']);
             move_uploaded_file($temp,'../img/'.$imagen);
             header("Location:registroPost.php?si=si");
         }

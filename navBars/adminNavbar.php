@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark position-fixed" style="width:100%">
+<nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
     <a class="navbar-brand"><?php echo $_SESSION['user'];?></a>
     <button class="navbar-toggler">
