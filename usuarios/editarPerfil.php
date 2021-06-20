@@ -42,7 +42,6 @@
                 $contrasena = password_hash($_POST['contrasena'],PASSWORD_DEFAULT);
                 actualizarUsuarioCC($_POST['usuario'],$_POST['correo'],$_SESSION['type'],$_SESSION['state'],$contrasena,$_SESSION['id']);
             }
-            $_SESSION['user'] = $_POST['usuario'];
             header('Location: editarPerfil.php');
         }
         

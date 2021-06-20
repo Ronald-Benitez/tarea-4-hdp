@@ -23,6 +23,15 @@
         </div>
     </nav>
     <div class="container-xxl d-flex justify-content-center">
+    <?php if (isset($_SESSION['message'])) { //MEnsaje de alerta?>
+        <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
+            <strong><?=$_SESSION['message']?></strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php 
+        unset($_SESSION['message']);
+        unset($_SESSION['message_type']);
+    }?>
     <div class="present">
         <p class="fs-2 fw-bold p-0 m-0">BIENVENIDOS A <span class="dream">DREAM</span><span class="craft">CRAFT</span></p>
     </div>

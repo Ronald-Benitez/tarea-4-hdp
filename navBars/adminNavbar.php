@@ -1,3 +1,18 @@
+<?php
+  include_once ('../database/crudUsuarios.php');
+  try {
+    $buscar_usu=buscarUsuario($_SESSION['id'],"idUsuario");
+    $datos_usu = mysqli_fetch_assoc($buscar_usu);
+    $_SESSION['user'] = $datos_usu['usuario'];
+    $_SESSION['type'] = $datos_usu['tipo'];
+    $_SESSION['state'] = $datos_usu['estado'];
+  } catch (\Throwable $th) {
+    $_SESSION['message'] = "Usuario no encontrado";
+    $_SESSION['message_type'] = "warning";
+    header("Location:../index.php");
+  }
+ 
+?>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
     <a href="../usuarios/editarPerfil.php" class="navbar-brand"><?php echo $_SESSION['user'];?></a>
@@ -19,6 +34,9 @@
 
             <li class="nav-item">
                 <a class="nav-link" href="../usuarios/adminUsuarios.php">Usuarios</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../usuarios/editarPerfil.php">Perfil</a>
             </li>
         
         </ul>
