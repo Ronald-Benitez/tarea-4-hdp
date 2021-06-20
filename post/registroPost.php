@@ -10,7 +10,8 @@ if(isset($_POST['titulo'])){//Si se trae un titulo
         $tipo = $_FILES['imagen']['type'];      //Se crea la imagen
         $temp = $_FILES['imagen']['tmp_name'];  //Direccion de la imagen
 
-        if(!(strpos($tipo,'png' || $tipo,'jpg'))){//Acciones de formato incorrecto
+        if(!strpos($tipo,'png') && !strpos($tipo,'jpg')){//Acciones de formato incorrecto
+            echo ($tipo);
             $_SESSION['message'] = "La imagen debe ser jpg o png";
             $_SESSION['message_type'] = "warning";
         }else{//Si estan bien sus datos
@@ -69,21 +70,22 @@ if(isset($_POST['titulo'])){//Si se trae un titulo
             <form action="registroPost.php" method="post" enctype="multipart/form-data">
                 <div>
                     <label class="form-label">Fecha</label>
-                    <input type="datetime" class="form-control" name="fecha" id="" value="<?=$fecha?>" readonly>
+                    <input type="datetime" class="form-control entrada" name="fecha" id="Fecha" value="<?=$fecha?>" readonly>
                 </div>
                 <div>
                     <label class="form-label">Titulo</label>
-                    <input type="text" name="titulo" id="" class="form-control">
+                    <input type="text" name="titulo" id="Titulo" class="form-control entrada">
                 </div>
                 <div>
                     <label class="form-label">Imagen</label>
-                    <input type="file" name="imagen" id="" class="form-control">
+                    <input type="file" name="imagen" id="Imagén" class="form-control entrada">
                 </div>
                 <div>
                     <label for="">Texto</label>
-                    <textarea name="texto" id="" cols="30" rows="10" class="form-control"></textarea>
+                    <textarea name="texto" id="Texto" cols="30" rows="10" class="form-control entrada"></textarea>
                 </div>
-                <input type="submit" value="Guardar ">
+                <input type="submit" class="btn btn-primary mt-2" value="Guardar ">
+                <div id="alerta" class="mt-2"></div>
             </form>
 
         </div>
@@ -92,5 +94,8 @@ if(isset($_POST['titulo'])){//Si se trae un titulo
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="funcionesRPost.js"></script>
 </body>
 </html>

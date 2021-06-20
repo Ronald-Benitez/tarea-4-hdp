@@ -75,11 +75,11 @@ if (isset($_GET['id'])){                        //Si existe la id en el irl
             <form action="editarPost.php?id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data">
                 <div>
                     <label class="form-label">Fecha</label>
-                    <input type="datetime" class="form-control" name="fecha" id="" value="<?=$fecha?>" readonly>
+                    <input type="datetime" class="form-control" name="fecha" id="Fecha" value="<?=$fecha?>" readonly>
                 </div>
                 <div>
                     <label class="form-label">Titulo</label>
-                    <input type="text" name="titulo" id="" class="form-control" value="<?=$row['titulo']?>">
+                    <input type="text" name="titulo" id="Titulo" class="form-control entrada" value="<?=$row['titulo']?>">
                 </div>
                 <div>
                     <label class="form-label">Imagen</label>
@@ -87,9 +87,10 @@ if (isset($_GET['id'])){                        //Si existe la id en el irl
                 </div>
                 <div>
                     <label for="">Texto</label>
-                    <textarea name="texto" id="" cols="30" rows="10" class="form-control" ><?=$row['texto']?></textarea>
+                    <textarea name="texto" id="Texto" cols="30" rows="10" class="form-control entrada" ><?=$row['texto']?></textarea>
                 </div>
                 <input type="submit" value="Actualizar" class="btn btn-secondary mt-2">
+                <div class="mt-2" id="alerta"></div>
             </form>
 
         </div>
@@ -98,5 +99,8 @@ if (isset($_GET['id'])){                        //Si existe la id en el irl
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="funcionesRPost.js"></script>
 </body>
 </html>
