@@ -18,7 +18,7 @@
         $_SESSION['type'] = $datos_usu['tipo'];
         $_SESSION['state'] = $datos_usu['estado'];
 
-        // comparar tipos de usuarios
+        // comparar tipos de usuarios para redireccion a su pagina correspondiente
         if($_SESSION['type']=="viewer"){
             header('Location: ../post/post.php');
         }

@@ -3,7 +3,7 @@ include_once ("conexion.php");
 
 
 
-function mostrarUsuarios(){
+function mostrarUsuarios(){//Funcion para traer los datos de un los usuarios
     try {
         //Conección y ejecución del query
         $sql = "SELECT * FROM usuarios";
@@ -17,8 +17,9 @@ function mostrarUsuarios(){
     
 }
 
-function ingresarUsuarios($usuario,$correo,$contrasena,$tipo){
+function ingresarUsuarios($usuario,$correo,$contrasena,$tipo){//funcion apra agregar un nuevo usuario a la base de datos
     try {
+        //Conección y ejecución del query
         $con=connect();
         $sql = "INSERT INTO usuarios(usuario,correo,contrasena,tipo,estado) VALUES('$usuario','$correo','$contrasena','$tipo','habilitado')";
         $resultado=mysqli_query($con,$sql);
@@ -29,8 +30,9 @@ function ingresarUsuarios($usuario,$correo,$contrasena,$tipo){
      
 }
 
-function habilitarUsuario($idUsuario){
+function habilitarUsuario($idUsuario){//Funcion para cambiar el estado de un usuario a habilitado
     try {
+        //Conección y ejecución del query
         $con=connect();
         $sql = "UPDATE usuarios SET estado='habilitado' WHERE idUsuario='$idUsuario'";
         $resultado=mysqli_query($con,$sql);
@@ -40,8 +42,9 @@ function habilitarUsuario($idUsuario){
     }
 }
 
-function deshabilitarUsuario($idUsuario){
+function deshabilitarUsuario($idUsuario){//funcion para deshabilitar las aaciones de un usuario
     try {
+        //Conección y ejecución del query
         $con=connect();
         $sql = "UPDATE usuarios SET estado='deshabilitado' WHERE idUsuario='$idUsuario'";
         $resultado=mysqli_query($con,$sql);
@@ -51,8 +54,9 @@ function deshabilitarUsuario($idUsuario){
     }
 }
 
-function borrarUsuario($idUsuario){
+function borrarUsuario($idUsuario){//funcion para eliminar un usuario
     try {
+        //Conección y ejecución del query
         $con=connect();
         $sql = "DELETE FROM usuarios WHERE idUsuario='$idUsuario'";
         $resultado=mysqli_query($con,$sql);
@@ -62,7 +66,7 @@ function borrarUsuario($idUsuario){
     }
 }
 
-function buscarUsuario($valor,$opcion){
+function buscarUsuario($valor,$opcion){ //funcion para buscar los datos de un usuario
     try {
         //Conección y ejecución del query
         $sql = "SELECT * FROM usuarios WHERE $opcion='$valor'";
@@ -75,8 +79,9 @@ function buscarUsuario($valor,$opcion){
     }
 }
 
-function actualizarUsuarioSNC($usuario,$correo,$tipo,$estado,$idUsuario){
+function actualizarUsuarioSNC($usuario,$correo,$tipo,$estado,$idUsuario){//funcion para actulizar los datos de un usuario sin la contraseña
     try {
+        //Conección y ejecución del query
         $con=connect();
         $sql = "UPDATE usuarios SET usuario='$usuario',correo='$correo',tipo='$tipo',estado='$estado' WHERE idUsuario='$idUsuario'";
         $resultado=mysqli_query($con,$sql);
@@ -86,8 +91,9 @@ function actualizarUsuarioSNC($usuario,$correo,$tipo,$estado,$idUsuario){
     }
 }
 
-function actualizarUsuarioCC($usuario,$correo,$tipo,$estado,$contrasena,$idUsuario){
+function actualizarUsuarioCC($usuario,$correo,$tipo,$estado,$contrasena,$idUsuario){//funcion para actulizar los datos de un usuario con su contraseña
     try {
+        //Conección y ejecución del query
         $con=connect();
         $sql = "UPDATE usuarios SET usuario='$usuario',correo='$correo',tipo='$tipo',estado='$estado',contrasena='$contrasena' WHERE idUsuario='$idUsuario'";
         $resultado=mysqli_query($con,$sql);

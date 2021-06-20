@@ -2,18 +2,18 @@
 include_once ("../database/crudPost.php");
 $datos;
 
-if(isset($_POST["titulo"])){
-    if($_POST["titulo"]!=""){
-        $datos = buscarPostSIMG($_POST["titulo"],"titulo");
-        if($datos->num_rows==0){
-            $datos = mostrarPostsSIMG();
+if(isset($_POST["titulo"])){                                //Se comprieba si esta el titulo
+    if($_POST["titulo"]!=""){                               //Se mira si esta vacio
+        $datos = buscarPostSIMG($_POST["titulo"],"titulo"); //Se busca el post mandado
+        if($datos->num_rows==0){                            //Si el post viene vacio
+            $datos = mostrarPostsSIMG();                    //Se busca el post especifico
         }
     }else{
-        $datos = mostrarPostsSIMG();
+        $datos = mostrarPostsSIMG();                        //Si esta vacio muestra todos los post
     }
     
 }else{
-    $datos = mostrarPostsSIMG();
+    $datos = mostrarPostsSIMG();                            //sino tiene titulo trae todos los post
 }
 
 
@@ -30,13 +30,13 @@ if(isset($_POST["titulo"])){
 </head>
 <body>
     <?php
-        if(!isset($_COOKIE['session_id'])){             //Si no se tiene un token de logeo
+        if(!isset($_COOKIE['session_id'])){                 //Si no se tiene un token de logeo
             header('Location: ../login/login.php');
-        }elseif($_SESSION['type']=="viewer"){         //Si el usuario es un viewer
+        }elseif($_SESSION['type']=="viewer"){               //Si el usuario es un viewer
             header('Location: ../post/post.php');
         }elseif($_SESSION['type']=="admin"){                //Si el usuario es un administrador
             include_once ('../navBars/adminNavbar.php');
-        }else{                                          //si no tiene un rol definido
+        }else{                                               //si no tiene un rol definido
             header('Location: ../login/login.php');
         }
     ?>
@@ -61,7 +61,7 @@ if(isset($_POST["titulo"])){
 
                 <div class="row justify-content-center mt-3">
                     <div class="col align-self-center">
-                    <?php if (isset($_SESSION['si'])) { ?>
+                    <?php if (isset($_SESSION['si'])) { //alert de post eliminado?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong>Post eliminado</strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -74,7 +74,7 @@ if(isset($_POST["titulo"])){
                     </div>
                 </div>
                 
-                <?php if(isset($_POST["titulo"])){ ?>
+                <?php if(isset($_POST["titulo"])){ //Creacion de card para los post?>
                     <div class="row">
                 <?php }else{ ?>
                     <div class="row row-cols-3 row-cols-md- 2g-4">

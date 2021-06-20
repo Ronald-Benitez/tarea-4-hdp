@@ -1,19 +1,19 @@
 <?php
 include_once ('../database/crudUsuarios.php');
 
-$opcion = 'tipo';
-$valor = 'admin';
+$opcion = 'tipo';//Seteo de la busqueda por tipo
+$valor = 'admin';//Seteo de la busqueda por cvalor
 
-$opciones =["usuario","correo","tipo","estado"];
+$opciones =["usuario","correo","tipo","estado"];//Seteo de datos requeridos
 
-if(isset($_SESSION['opcion'])){
+if(isset($_SESSION['opcion'])){//Si hay una opcion a realizar
     $opcion = $_SESSION['opcion'];
     $valor = $_SESSION['valor'];
     unset($_SESSION['opcion']);
     unset($_SESSION['valor']);
 }
 
-$datos = buscarUsuario($valor,$opcion);
+$datos = buscarUsuario($valor,$opcion);//Se busca el tipo de usuario que es el que entra
 
 
 ?>
@@ -44,7 +44,7 @@ $datos = buscarUsuario($valor,$opcion);
         <div class="d-flex flex-column">
             <div class="row">
 
-                <?php if (isset($_SESSION['message'])) { ?>
+                <?php if (isset($_SESSION['message'])) { //MEnsaje de alerta?>
                     <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
                         <strong><?=$_SESSION['message']?></strong>
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

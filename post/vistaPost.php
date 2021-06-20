@@ -2,20 +2,20 @@
 include_once ("../database/crudPost.php");
 include_once ("../database/crudComentarios.php");
 
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('America/El_Salvador'); //Seteo de el horario local
 
-if (isset($_GET["id"])){
-    $id = $_GET["id"];
-    $datos = buscarPost($id,"idPost");
-    $row = $datos->fetch_assoc();
+if (isset($_GET["id"])){                //id del post
+    $id = $_GET["id"];                  
+    $datos = buscarPost($id,"idPost");  //Se busca el post especifico
+    $row = $datos->fetch_assoc();       //Se extrauen sus datos
 
-    $comentarios = buscarComentarios($id,"idPost","aprobado","estadoC");
+    $comentarios = buscarComentarios($id,"idPost","aprobado","estadoC");//Se buscan los comentarios
 
-    if (isset($_POST['comentario']) && $_POST['comentario'] != ""){
-        echo (date("Y-m-d H:i:s"));
+    if (isset($_POST['comentario']) && $_POST['comentario'] != ""){//Si hay un comentario no vacio
+        echo (date("Y-m-d H:i:s"));//Se Marca la fecha
         echo ("si");
-        insertarComentario(date("Y-m-d H:i:s"),$id,$_SESSION['id'],$_POST['comentario'],"esperando");
-        header("Location:vistaPost.php?id=$id");
+        insertarComentario(date("Y-m-d H:i:s"),$id,$_SESSION['id'],$_POST['comentario'],"esperando");//Se crea la sollicitud para comentario
+        header("Location:vistaPost.php?id=$id");//Se regresa al post
     }
 
 ?>
@@ -65,7 +65,7 @@ if (isset($_GET["id"])){
             
             </div>
 
-            <?php if($_SESSION['state']=="habilitado"){ ?>
+            <?php if($_SESSION['state']=="habilitado"){ //Si no esta habilitado el usuario no puede comentar?>
             <div class="row justify-content-center mt-2">
             
                 <div class="col-6 align-self-center">
@@ -85,7 +85,7 @@ if (isset($_GET["id"])){
                 <div class="col-6 align-self-center">
                 
                 <?php
-                while ($row = $comentarios->fetch_assoc()){
+                while ($row = $comentarios->fetch_assoc()){//Se cargan los comentarios
                 ?>
                     <div class="card m-1">
                         <div class="card-header">

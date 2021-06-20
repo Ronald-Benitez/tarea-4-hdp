@@ -1,22 +1,22 @@
 <?php 
 include_once ("../database/crudPost.php");
-date_default_timezone_set('America/El_Salvador');
-$fecha = date("Y-m-d H:i:s");
+date_default_timezone_set('America/El_Salvador'); //Seteo de el horario local
+$fecha = date("Y-m-d H:i:s");                       //Setio de la fehca y hora actual
 
-if(isset($_POST['titulo'])){
-    $imagen = $_FILES['imagen']['name'];
+if(isset($_POST['titulo'])){//Si se trae un titulo 
+    $imagen = $_FILES['imagen']['name']; //Se trae la imagen nueva 
 
-    if(isset($imagen) && $imagen != ""){
-        $tipo = $_FILES['imagen']['type'];
-        $temp = $_FILES['imagen']['tmp_name'];
+    if(isset($imagen) && $imagen != ""){ //Mientras la imagen no este vacia
+        $tipo = $_FILES['imagen']['type'];      //Se crea la imagen
+        $temp = $_FILES['imagen']['tmp_name'];  //Direccion de la imagen
 
-        if(!(strpos($tipo,'png' || $tipo,'jpg'))){
+        if(!(strpos($tipo,'png' || $tipo,'jpg'))){//Acciones de formato incorrecto
             $_SESSION['message'] = "La imagen debe ser jpg o png";
             $_SESSION['message_type'] = "warning";
-        }else{
-            insertarPost($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$imagen,$_POST['texto']);
-            move_uploaded_file($temp,'../img/'.$imagen);
-            header("Location:registroPost.php?si=si");
+        }else{//Si estan bien sus datos
+            insertarPost($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$imagen,$_POST['texto']);//Se inserta la imagen
+            move_uploaded_file($temp,'../img/'.$imagen);//Se crea la imagen en la carpeta de imagenes
+            header("Location:registroPost.php?si=si");//Se Manda la alerta de la insercion
         }
     }
 }
@@ -34,6 +34,7 @@ if(isset($_POST['titulo'])){
 </head>
 <body>
     <?php
+        /*SESIONSES DISPONIBLES*/ 
         if(!isset($_COOKIE['session_id'])){             //Si no se tiene un token de logeo
             header('Location: ../login/login.php');
         }elseif($_SESSION['type']=="viewer"){         //Si el usuario es un viewer
@@ -48,14 +49,14 @@ if(isset($_POST['titulo'])){
 
         <div class="col-md-4">
 
-            <?php if (isset($_GET['si'])) { ?>
+            <?php if (isset($_GET['si'])) { //Mensaje de post registrado?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Post registrado</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             <?php 
             }
-            if(isset($_SESSION['message'])){?>
+            if(isset($_SESSION['message'])){//Mensaje de warning por error de formato deimagen?>
                 <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
                     <strong><?=$_SESSION['message']?></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>

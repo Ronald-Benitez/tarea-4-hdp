@@ -1,19 +1,19 @@
 
-function validarContrasena(){
-    let input = document.querySelector('#Contrasena').value;
-    let pasar=true;
+function validarContrasena(){//Funcion par validar contraseña
+    let input = document.querySelector('#Contrasena').value;//Se extrae el valor del input de la contraseña
+    let pasar=true;//Funcion para que el formlario pueda subirse
 
-    if(!input.includes("+")&&!input.includes ("*")&&!input.includes (".")){
+    if(!input.includes("+")&&!input.includes ("*")&&!input.includes (".")){//Detecta si no hay uno de lso simbolos especiales
         $("#alerta").append(`<div class="alert alert-danger" role="alert">La contraseña debe incluir al menos un símbolo (+*.)</div>`);
         pasar=false;
     }
 
-    if(input.length<8){
+    if(input.length<8){//Detecta si la contrseña es mayor a 8 caracteres
         $("#alerta").append(`<div class="alert alert-danger" role="alert">Las contraseña deben tener 8 caracteres como mínimo</div>`);
         pasar=false;
     }
 
-    if(input.includes(" ")){
+    if(input.includes(" ")){//Detecta si la contraseña tiene esacios
         $("#alerta").append(`<div class="alert alert-danger" role="alert">Las contraseña no debe contener espacios</div>`);
         pasar=false;
     }
@@ -21,12 +21,12 @@ function validarContrasena(){
     return pasar;
 }
 
-$("form").submit(function (evento) {  
+$("form").submit(function (evento) {  //funcion de evento al tratar de subir el formulario
     var pasar=true;
-    mantener = document.querySelector(".mantener").checked;
+    mantener = document.querySelector(".mantener").checked; //funcion para mantener usuaario
     console.log(mantener);
-    $(".alert").detach();
-    $('.entrada').each( function (indexInArray, valueOfElement) { 
+    $(".alert").detach();//Se eliminan alertas
+    $('.entrada').each( function (indexInArray, valueOfElement) { //recorrido por las entradas y valores vacios
         if($(this).val() ==""){
             if($(this).attr("id")=="Contrasena"){
                 if(!mantener){
@@ -39,7 +39,7 @@ $("form").submit(function (evento) {
         }
     });
     
-    if(!pasar || (!mantener && !validarContrasena())){
+    if(!pasar || (!mantener && !validarContrasena())){//condiciones para que se detenga el envio del formulario
         evento.preventDefault();
     }
 });
@@ -48,7 +48,7 @@ $('document').ready(function(){
     generarCampos();
 })
 
-function generarCampos(){
+function generarCampos(){//Agregar estilos 
 
     if($("#tipo").val()=="estado"){
         $("#estado").css("display", "block");

@@ -1,38 +1,38 @@
 <?php 
 include_once ("../database/crudPost.php");
-date_default_timezone_set('America/El_Salvador');
-$fecha = date("Y-m-d H:i:s");
+date_default_timezone_set('America/El_Salvador');   //Definicion de la zona horaria local
+$fecha = date("Y-m-d H:i:s");                       //Fecha actual
 
-$row;
-if (isset($_GET['id'])){
-    $id = $_GET['id'];
-    $datos =buscarPostActualizar($_GET['id']);
-    $row = $datos->fetch_assoc();
+$row; //Variable para las filas
+if (isset($_GET['id'])){                        //Si existe la id en el irl
+    $id = $_GET['id'];                          //Se extrae la id
+    $datos =buscarPostActualizar($_GET['id']);  //Se traen los datos actulizables del post
+    $row = $datos->fetch_assoc();               //Se crea el objeto de los datos traidos
 }
 
-if(isset($_POST['titulo'])){
-    if(isset($_POST['titulo'])){
-        $imagen = $_FILES['imagen']['name'];
+
+    if(isset($_POST['titulo'])){                //Si hay un titulo a editar
+        $imagen = $_FILES['imagen']['name'];    //Extrae la imagen con el nombre
     
-        if(isset($imagen) && $imagen != ""){
-            $tipo = $_FILES['imagen']['type'];
-            $temp = $_FILES['imagen']['tmp_name'];
+        if(isset($imagen) && $imagen != ""){    //Si la imagen no esta vacia
+            $tipo = $_FILES['imagen']['type'];  //Se extre la imagen
+            $temp = $_FILES['imagen']['tmp_name']; //Se crea la imagen temporar
             
-            if(!(strpos($tipo,'png') || !strpos($tipo,'jpg'))){
+            if(!(strpos($tipo,'png') || !strpos($tipo,'jpg'))){//si no esta en un formato valido
                 $_SESSION['message'] = "La imagen debe ser jpg o png";
                 $_SESSION['message_type'] = "warning";
-            }else{
-                editarPost($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$imagen,$_POST['texto'],$_GET['id']);
-                move_uploaded_file($temp,'../img/'.$imagen);
-                header("Location:editarPost.php?id=$id");
+            }else{//si estan los datos correctos se edita el post
+                editarPost($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$imagen,$_POST['texto'],$_GET['id']);//Se edita el post
+                move_uploaded_file($temp,'../img/'.$imagen);//se cambia la direcciona a la imagen correspondiente
+                header("Location:editarPost.php?id=$id");//Se regresa a la pagina
             }
         }else{
-            editarPostSIMG($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$_POST['texto'],$_GET['id']);
-            header("Location:editarPost.php?id=$id");
+            editarPostSIMG($_POST['fecha'],$_SESSION['id'],$_POST['titulo'],$_POST['texto'],$_GET['id']);//Se editan los datos sin la imagen
+            header("Location:editarPost.php?id=$id");//Se regresa a la edicion del post
         }
     }
 
-}
+
  
 ?>
 
@@ -61,7 +61,7 @@ if(isset($_POST['titulo'])){
 
         <div class="col-md-4">
 
-        <?php if (isset($_SESSION['si'])) { ?>
+        <?php if (isset($_SESSION['si'])) { //Busca actualiazciones de estado "si" para lanzar la alert?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     <strong>Post actualizado</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
