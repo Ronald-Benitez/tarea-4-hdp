@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienvenido!</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <link rel="stylesheet" href="../paginaInicio/style.css">
+    <link rel="stylesheet" href="paginaInicio/style.css">
 </head>
 <body>
 <div class="bg img-fluid">
     <nav class="navbar navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand">
-            <img src="../paginaInicio/minecraft_logo_icon_168974.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+            <img src="paginaInicio/minecraft_logo_icon_168974.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
             Bienvenido
             </a>
             <li class="nav-item">
