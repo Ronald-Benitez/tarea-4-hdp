@@ -17,8 +17,8 @@
             Bienvenido
             </a>
             <li class="nav-item">
-                <a class="btn btn-success" href="../login/login.php">Ingresar</a>
-                <a class="btn btn-light" href="../usuarios/registrarUsuario.php">Registrarse</a>
+                <a class="btn btn-success" href="login/login.php">Ingresar</a>
+                <a class="btn btn-light" href="usuarios/registrarUsuario.php">Registrarse</a>
             </li>
         </div>
     </nav>
