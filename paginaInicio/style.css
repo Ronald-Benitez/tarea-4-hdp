@@ -1,0 +1,29 @@
+body, html {
+    height: 100%;
+    }
+    .bg {
+    /* The image used */
+    background-image: url("../paginaInicio/inicio.jpg");
+
+    /* Half height */
+    
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+.present{
+    background-color: rgba(255, 255, 255, 0.561);
+    border-radius: 25px;
+    padding: 15px;
+    margin: 10px;
+    margin-top: 50px;
+}
+.dream{
+    color: rgb(29, 175, 73);
+}
+.craft{
+    color: rgb(158, 66, 5);
+}
