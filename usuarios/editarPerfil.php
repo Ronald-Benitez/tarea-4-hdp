@@ -26,11 +26,11 @@
         $usu =  mysqli_fetch_assoc($usuario);
         $pasar = true;
 
-        if(!empty($cou) && $cou['idUsuario']!=$_GET['id']){//Si ya hay un ususario registrado con ese correo
+        if(!empty($cou) && $cou['idUsuario']!=$_SESSION['id']){//Si ya hay un ususario registrado con ese correo
             $_SESSION['messageC'] = 'El correo ya se encuentra registrado';
             $pasar = false;
         }
-        if(!empty($usu) && $usu['idUsuario']!=$_GET['id']){//Si hay ususario registrado con ese nombre de usuario
+        if(!empty($usu) && $usu['idUsuario']!=$_SESSION['id']){//Si hay ususario registrado con ese nombre de usuario
             $_SESSION['messageU'] = 'El usuario ya se encuentra registrado';
             $pasar = false;
         }
@@ -64,6 +64,24 @@
 <body>
     <div class="d-flex justify-content-center mt-4">
         <div class="col-md-4 ">
+        <?php if (isset($_SESSION['messageC'])) { //Alerta de error por correo?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong><?=$_SESSION['messageC']?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php 
+            unset($_SESSION['messageC']);
+        }
+        ?>
+        <?php if (isset($_SESSION['messageU'])) { //Alerta de Erro por usuario repetido?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong><?=$_SESSION['messageU']?></strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php 
+            unset($_SESSION['messageU']);
+        }
+        ?>
         <form action="editarPerfil.php" method="post" class="border p-4 border border-dark rounded-2">
             <div>
                 <label class="form-label">Usuario</label>
