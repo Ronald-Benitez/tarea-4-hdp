@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
-    <a class="navbar-brand"><?php echo $_SESSION['user'];echo " - "; echo $_SESSION['id']?></a>
+    <a class="navbar-brand"><?php echo $_SESSION['user'];?></a>
     <button class="navbar-toggler">
       <i class="fas fa-bars"></i>
     </button>

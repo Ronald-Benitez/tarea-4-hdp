@@ -56,7 +56,7 @@ if (isset($_GET["id"])){                //id del post
                             <p class="card-text p-4"><?=$row['texto']?></p>
                             <p class="card-text"><small class="text-muted">Autor: <?=$row['usuario']?></small></p>
                             <p class="card-text"><small class="text-muted">Creado: <?=$row['fecha']?></small></p>
-                            <p class="card-text"><small class="text-muted">Número: <?=$row['idPost']?></small></p>
+                            <p class="card-text"><small class="text-muted">NÃºmero: <?=$row['idPost']?></small></p>
                         </div>
                             
                     </div>
