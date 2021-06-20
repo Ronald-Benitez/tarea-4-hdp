@@ -1,16 +1,14 @@
 <?php
-    include_once ('../database/crudUsuarios.php');
-    try {
-      $buscar_usu=buscarUsuario($_SESSION['id'],"idUsuario");
-      $datos_usu = mysqli_fetch_assoc($buscar_usu);
-      $_SESSION['user'] = $datos_usu['usuario'];
-      $_SESSION['type'] = $datos_usu['tipo'];
-      $_SESSION['state'] = $datos_usu['estado'];
-    } catch (\Throwable $th) {
-      $_SESSION['message'] = "Usuario no encontrado";
-      $_SESSION['message_type'] = "warning";
-      header("Location:../index.php");
-    }
+  include_once ('../database/crudUsuarios.php');
+  $buscar_usu=buscarUsuario($_SESSION['id'],"idUsuario");
+  $datos_usu = mysqli_fetch_assoc($buscar_usu);
+  if(!empty($datos_usu)){
+    $_SESSION['user'] = $datos_usu['usuario'];
+    $_SESSION['type'] = $datos_usu['tipo'];
+    $_SESSION['state'] = $datos_usu['estado'];
+  }else{
+    header("Location:inde.php");
+  }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
