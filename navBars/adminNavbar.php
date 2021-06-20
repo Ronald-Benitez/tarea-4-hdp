@@ -7,7 +7,7 @@
     $_SESSION['type'] = $datos_usu['tipo'];
     $_SESSION['state'] = $datos_usu['estado'];
   }else{
-    header("Location:inde.php");
+    header("Location:../index.php?status=err");
   }
 ?>
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">

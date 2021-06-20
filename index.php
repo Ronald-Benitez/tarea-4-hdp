@@ -22,22 +22,22 @@
             </li>
         </div>
     </nav>
-    <div class="container-xxl d-flex justify-content-center">
-    <?php if (isset($_SESSION['message'])) { //MEnsaje de alerta?>
-        <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
-            <strong><?=$_SESSION['message']?></strong>
+    <center>
+
+    <?php if (isset($_GET['status'])) { //MEnsaje de alerta?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Usuario no encontrado</strong>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-    <?php 
-        unset($_SESSION['message']);
-        unset($_SESSION['message_type']);
-    }?>
+    <?php } ?>
+
+    </center>
+    <div class="container-xxl d-flex justify-content-center">
     <div class="present">
         <p class="fs-2 fw-bold p-0 m-0">BIENVENIDOS A <span class="dream">DREAM</span><span class="craft">CRAFT</span></p>
     </div>
     </div>
 </div>
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
 </body>
