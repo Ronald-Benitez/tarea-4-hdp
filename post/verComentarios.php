@@ -2,13 +2,13 @@
 include_once ("../database/crudPost.php");
 include_once ("../database/crudComentarios.php");
 
-date_default_timezone_set('America/Los_Angeles');
+date_default_timezone_set('America/El_Salvador'); //Seteo de el horario local
 
-if (isset($_GET["id"])){
-    $id = $_GET["id"];
-    $comentarios = buscarComentariosGeneral($id,"idPost");
-    $titulo = tituloPost($_GET["id"])->fetch_assoc();
-    $_SESSION['idP']=$id;
+if (isset($_GET["id"])){                                    //si hay un post especifico
+    $id = $_GET["id"];                                      //Se obtiene su id
+    $comentarios = buscarComentariosGeneral($id,"idPost");  //Se busca el comentario
+    $titulo = tituloPost($_GET["id"])->fetch_assoc();       //Se extrae el comentario
+    $_SESSION['idP']=$id;                                   //Se crea la secion del id del post
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +39,7 @@ if (isset($_GET["id"])){
                 <div class="col align-self-center">
                 <h4 class="m-4">Comentarios del post: <?=$titulo['titulo']?></h4>
 
-                <?php if (isset($_SESSION['message'])) { ?>
+                <?php if (isset($_SESSION['message'])) { //Mensaje de error?>
                 <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
                     <strong><?=$_SESSION['message']?></strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -51,7 +51,7 @@ if (isset($_GET["id"])){
 
                 ?>
                 <?php
-                while ($row = $comentarios->fetch_assoc()){
+                while ($row = $comentarios->fetch_assoc()){//Se Extraen todoslos daotos de comentario
                     if($row['estadoC'] != "aprobado"){
                             echo "<div class='card m-2 border-warning'>";
                         }else{
@@ -69,6 +69,7 @@ if (isset($_GET["id"])){
                                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                                     <a href="eliminarComentario.php?id=<?=$row['idComentario']?>" class="btn btn-danger">Eliminar</a>
                                     <?php
+                                        //MOSTAR SOLO COMENTARIO APROBADOS
                                         if($row['estadoC'] != "aprobado"){
                                             $idC = $row['idComentario'];
                                             echo "<a href='aprobarComentario.php?id=$idC' class='btn btn-success'>Aprobar</a>";

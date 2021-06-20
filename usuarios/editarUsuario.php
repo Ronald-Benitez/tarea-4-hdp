@@ -1,36 +1,35 @@
 <?php 
 include_once ("../database/crudUsuarios.php");
-date_default_timezone_set('America/El_Salvador');
-$fecha = date("Y-m-d H:i:s");
+date_default_timezone_set('America/El_Salvador');   //Seteo del horario
+$fecha = date("Y-m-d H:i:s");                       //Seteo de fecha y hora
 
-$datos = buscarUsuario($_GET['id'],"idUsuario");
-$row = $datos->fetch_assoc();
+$datos = buscarUsuario($_GET['id'],"idUsuario");    //Se busca los datos del usuario
+$row = $datos->fetch_assoc();                       //Se extraen los datos
 
 
-if(isset($_POST['usuario'])){
-    $correo = buscarUsuario($_POST['correo'],"correo");
+if(isset($_POST['usuario'])){                           //Si ya hay un ususario
+    $correo = buscarUsuario($_POST['correo'],"correo"); //Se busca por correo
     $cou =  mysqli_fetch_assoc($correo);
-    $usuario = buscarUsuario($_POST['usuario'],"usuario");
+    $usuario = buscarUsuario($_POST['usuario'],"usuario");//Se busca por usuario
     $usu =  mysqli_fetch_assoc($usuario);
     $pasar = true;
 
-    if(!empty($cou) && $cou['idUsuario']!=$_GET['id']){
+    if(!empty($cou) && $cou['idUsuario']!=$_GET['id']){//Si ya hay un ususario registrado con ese correo
         $_SESSION['messageC'] = 'El correo ya se encuentra registrado';
         $pasar = false;
     }
 
-    if(!empty($usu) && $usu['idUsuario']!=$_GET['id']){
+    if(!empty($usu) && $usu['idUsuario']!=$_GET['id']){//Si hay ususario registrado con ese nombre de usuario
         $_SESSION['messageU'] = 'El usuario ya se encuentra registrado';
         $pasar = false;
     }
-    if($pasar){
-        if($_POST['contrasena'] == ""){
+    if($pasar){//si no hay duplicados
+        if($_POST['contrasena'] == ""){//Si la contraseña viene vacia no se edita
             actualizarUsuarioSNC($_POST['usuario'],$_POST['correo'],$_POST['tipo'],$_POST['estado'],$_GET['id']);
-        }else{
+        }else{//Si no viene vacia se actualizan todos los campos
             $contrasena = password_hash($_POST['contrasena'],PASSWORD_DEFAULT);
             actualizarUsuarioCC($_POST['usuario'],$_POST['correo'],$_POST['tipo'],$_POST['estado'],$contrasena,$_GET['id']);
         }
-
         $_SESSION['opcion'] = "idUsuario";
         $_SESSION['valor'] = $_GET['id'];    
         header("Location:adminUsuarios.php");
@@ -51,9 +50,9 @@ if(isset($_POST['usuario'])){
     <?php
         if(!isset($_COOKIE['session_id'])){             //Si no se tiene un token de logeo
             header('Location: ../login/login.php');
-        }elseif($_SESSION['type']=="viewer"){         //Si el usuario es un viewer
+        }elseif($_SESSION['type']=="viewer"){            //Si el usuario es un viewer
             header('Location: ../post/post.php');
-        }elseif($_SESSION['type']=="admin"){                //Si el usuario es un administrador
+        }elseif($_SESSION['type']=="admin"){             //Si el usuario es un administrador
             include_once ('../navBars/adminNavbar.php');
         }else{                                          //si no tiene un rol definido
             header('Location: ../login/login.php');
@@ -63,7 +62,7 @@ if(isset($_POST['usuario'])){
 
         <div class="col-md-4">
         <h4 class="my-4 text-center">Editar usuario</h4>
-        <?php if (isset($_SESSION['messageC'])) { ?>
+        <?php if (isset($_SESSION['messageC'])) { //Alerta de error por correo?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong><?=$_SESSION['messageC']?></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -72,7 +71,7 @@ if(isset($_POST['usuario'])){
             unset($_SESSION['messageC']);
         }
         ?>
-        <?php if (isset($_SESSION['messageU'])) { ?>
+        <?php if (isset($_SESSION['messageU'])) { //Alerta de Erro por usuario repetido?>
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
                 <strong><?=$_SESSION['messageU']?></strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -81,7 +80,7 @@ if(isset($_POST['usuario'])){
             unset($_SESSION['messageU']);
         }
         ?>
-            <form action="editarUsuario.php?id=<?=$_GET['id']?>" method="post"" enctype="multipart/form-data" class="border p-4">
+            <form action="editarUsuario.php?id=<?=$_GET['id']?>" method="post" enctype="multipart/form-data" class="border p-4">
                 <div>
                     <label class="form-label">Usuario</label>
                     <input type="text" name="usuario" class="form-control entrada" id="Usuario" value="<?=$row['usuario']?>">

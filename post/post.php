@@ -2,17 +2,17 @@
 include_once ("../database/crudPost.php");
 $datos;
 
-if(isset($_POST["titulo"])){
-    if($_POST["titulo"]!=""){
-        $datos = buscarPost($_POST["titulo"],"titulo");
-        if($datos->num_rows==0){
+if(isset($_POST["titulo"])){                            //Si hay un post especifico que mostrar
+    if($_POST["titulo"]!=""){                           //si el post es diferente a un dato vacio
+        $datos = buscarPost($_POST["titulo"],"titulo"); //Se buscan sus datos
+        if($datos->num_rows==0){                        //Si no se encuentran los datos
             $datos = mostrarPosts();
         }
-    }else{
+    }else{                                              //Si el post  buscar es un string vacio
         $datos = mostrarPosts();
     }
     
-}else{
+}else{                                                  //Si no hay un post a buscar
     $datos = mostrarPosts();
 }
 
@@ -30,6 +30,7 @@ if(isset($_POST["titulo"])){
 </head>
 <body>
     <?php
+    /*ACCIONES MEDIANTE LAS SESSIONES*/
         if(!isset($_COOKIE['session_id'])){             //Si no se tiene un token de logeo
             header('Location: ../login/login.php');
         }elseif($_SESSION['type']=="viewer"){         //Si el usuario es un viewer
