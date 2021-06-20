@@ -15,7 +15,8 @@ if (isset($_GET["id"])){                //id del post
         echo (date("Y-m-d H:i:s"));//Se Marca la fecha
         echo ("si");
         insertarComentario(date("Y-m-d H:i:s"),$id,$_SESSION['id'],$_POST['comentario'],"esperando");//Se crea la sollicitud para comentario
-        header("Location:vistaPost.php?id=$id");//Se regresa al post
+        $_SESSION['message'] = "Comentario registrado";
+        $_SESSION['message_type'] = "success";
     }
 
 ?>
@@ -43,7 +44,6 @@ if (isset($_GET["id"])){                //id del post
     ?>
     <div class="d-flex justify-content-center">
         <div class="d-flex flex-column">
-        
             <div class="row justify-content-center mt-4">
             
                 <div class="col-6">
@@ -56,7 +56,7 @@ if (isset($_GET["id"])){                //id del post
                             <p class="card-text p-4"><?=$row['texto']?></p>
                             <p class="card-text"><small class="text-muted">Autor: <?=$row['usuario']?></small></p>
                             <p class="card-text"><small class="text-muted">Creado: <?=$row['fecha']?></small></p>
-                            <p class="card-text"><small class="text-muted">Número: <?=$row['idPost']?></small></p>
+                            <p class="card-text"><small class="text-muted">NÃºmero: <?=$row['idPost']?></small></p>
                         </div>
                             
                     </div>
@@ -64,11 +64,22 @@ if (isset($_GET["id"])){                //id del post
                 </div>
             
             </div>
-
+            
+            
             <?php if($_SESSION['state']=="habilitado"){ //Si no esta habilitado el usuario no puede comentar?>
             <div class="row justify-content-center mt-2">
             
                 <div class="col-6 align-self-center">
+
+                    <?php if (isset($_SESSION['message'])) { //MEnsaje de alerta?>
+                        <div class="alert alert-<?=$_SESSION['message_type']?> alert-dismissible fade show" role="alert">
+                            <strong><?=$_SESSION['message']?></strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php 
+                        unset($_SESSION['message']);
+                        unset($_SESSION['message_type']);
+                    }?>
 
                     <form action="vistaPost.php?id=<?=$id?>" method="post">
                         <div class="input-group mb-3">
