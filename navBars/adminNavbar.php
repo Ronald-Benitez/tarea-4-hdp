@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark sticky-top">
   <div class="container-fluid">
-    <a href="editarPerfil.php" class="navbar-brand"><?php echo $_SESSION['user'];?></a>
+    <a href="../usuarios/editarPerfil.php" class="navbar-brand"><?php echo $_SESSION['user'];?></a>
     <button class="navbar-toggler">
       <i class="fas fa-bars"></i>
     </button>
